@@ -1,5 +1,19 @@
 let todos = [];
 
+
+window.onload = function() { 
+    const storedTodos = localStorage.getItem('todos'); 
+    if (storedTodos) { 
+        todos = JSON.parse(storedTodos); 
+    } 
+    displayTodos(todos); 
+};
+
+
+function saveTodos() {
+    localStorage.setItem('todos', JSON.stringify(todos));
+}
+
 function addTodo(title, category) {
     const newTodo = {
         id: Date.now(),
@@ -8,11 +22,13 @@ function addTodo(title, category) {
         completed: false
     };
     todos.push(newTodo);
+    saveTodos();
     console.log('Todo aggiunto:', newTodo);
 }
 
 function deleteTodo(id) {
     todos = todos.filter(todo => todo.id !== id);
+    saveTodos();
     console.log('Todo eliminato, ID:', id);
 }
 
@@ -20,18 +36,19 @@ function toggleComplete(id) {
     todos = todos.map(todo => 
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
     );
+    saveTodos();
     console.log('Todo aggiornato, ID:', id);
 }
 
-function filtroTooDoCompletati() {
+function filterCompletedTodos() {
     return todos.filter(todo => todo.completed);
 }
 
-function filtroTooDoNonCompletati() {
+function filterPendingTodos() {
     return todos.filter(todo => !todo.completed);
 }
 
-function filtroCategorie(category) {
+function filterTodosByCategory(category) {
     return todos.filter(todo => todo.category === category);
 }
 
