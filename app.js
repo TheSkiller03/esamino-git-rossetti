@@ -1,6 +1,5 @@
 let todos = [];
 
-
 window.onload = function() { 
     const storedTodos = localStorage.getItem('todos'); 
     if (storedTodos) { 
@@ -8,7 +7,6 @@ window.onload = function() {
     } 
     displayTodos(todos); 
 };
-
 
 function saveTodos() {
     localStorage.setItem('todos', JSON.stringify(todos));
@@ -40,6 +38,24 @@ function toggleComplete(id) {
     console.log('Todo aggiornato, ID:', id);
 }
 
+function editTodoTitle(id, newTitle) {
+    const todo = todos.find(todo => todo.id === id);
+    if (todo) {
+        todo.title = newTitle;
+        saveTodos();
+        console.log('Titolo del Todo modificato:', newTitle);
+    }
+}
+
+function editTodoCategory(id, newCategory) {
+    const todo = todos.find(todo => todo.id === id);
+    if (todo) {
+        todo.category = newCategory;
+        saveTodos();
+        console.log('Categoria del Todo modificata:', newCategory);
+    }
+}
+
 function filterCompletedTodos() {
     return todos.filter(todo => todo.completed);
 }
@@ -50,6 +66,14 @@ function filterPendingTodos() {
 
 function filterTodosByCategory(category) {
     return todos.filter(todo => todo.category === category);
+}
+
+function countCompletedTodos() {
+    return todos.filter(todo => todo.completed).length;
+}
+
+function countIncompleteTodos() {
+    return todos.filter(todo => !todo.completed).length;
 }
 
 function showAllTodos() {
@@ -80,4 +104,8 @@ function displayTodos(todos) {
         todoItem.textContent = `${todo.title} - ${todo.category} (${todo.completed ? 'Completato' : 'Non completato'})`;
         appDiv.appendChild(todoItem);
     });
+
+    const completedCount = countCompletedTodos();
+    const incompleteCount = countIncompleteTodos();
+    console.log(`Todo completati: ${completedCount}, Todo non completati: ${incompleteCount}`);
 }
