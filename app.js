@@ -8,10 +8,10 @@ window.onload = function() {
     displayTodos(todos); 
 };
 
-/*function saveTodos() {
+function saveTodos() {
     localStorage.setItem('todos', JSON.stringify(todos));
 }
-*/
+
 function addTodo(title, category) {
     const newTodo = {
         id: Date.now(),
