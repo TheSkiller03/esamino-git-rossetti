@@ -97,3 +97,8 @@ function displayTodos(todos) {
         appDiv.appendChild(todoItem);
     });
 }
+
+function saveTodoWithCategory(todo, category) {
+    todo.category = category;
+    saveToDatabase(todo);
+}
