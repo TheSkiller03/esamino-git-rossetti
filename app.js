@@ -16,4 +16,9 @@ function deleteTodo(id) {
     console.log('Todo eliminato, ID:', id);
 }
 
-
+function toggleComplete(id) {
+    todos = todos.map(todo => 
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    );
+    console.log('Todo aggiornato, ID:', id);
+}
