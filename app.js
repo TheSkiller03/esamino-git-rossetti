@@ -22,3 +22,45 @@ function toggleComplete(id) {
     );
     console.log('Todo aggiornato, ID:', id);
 }
+
+function filtroTooDoCompletati() {
+    return todos.filter(todo => todo.completed);
+}
+
+function filtroTooDoNonCompletati() {
+    return todos.filter(todo => !todo.completed);
+}
+
+function filtroCategorie(category) {
+    return todos.filter(todo => todo.category === category);
+}
+
+function showAllTodos() {
+    displayTodos(todos);
+}
+
+function showCompletedTodos() {
+    const completedTodos = filterCompletedTodos();
+    displayTodos(completedTodos);
+}
+
+function showPendingTodos() {
+    const pendingTodos = filterPendingTodos();
+    displayTodos(pendingTodos);
+}
+
+function showTodosByCategory() {
+    const category = document.getElementById('categoryFilter').value;
+    const filteredTodos = filterTodosByCategory(category);
+    displayTodos(filteredTodos);
+}
+
+function displayTodos(todos) {
+    const appDiv = document.getElementById('app');
+    appDiv.innerHTML = '';
+    todos.forEach(todo => {
+        const todoItem = document.createElement('div');
+        todoItem.textContent = `${todo.title} - ${todo.category} (${todo.completed ? 'Completato' : 'Non completato'})`;
+        appDiv.appendChild(todoItem);
+    });
+}
