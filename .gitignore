@@ -1,0 +1,11 @@
+# Ignora i file di log
+*.log
+
+# Ignora la directory temporanea
+tmp/
+
+# Ignora i file compilati
+*.class
+
+# Ignora i file di configurazione locali
+*.env
