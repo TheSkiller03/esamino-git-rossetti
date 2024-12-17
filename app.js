@@ -1,6 +1,5 @@
 let todos = [];
 
-
 window.onload = function() { 
     const storedTodos = localStorage.getItem('todos'); 
     if (storedTodos) { 
@@ -8,7 +7,6 @@ window.onload = function() {
     } 
     displayTodos(todos); 
 };
-
 
 function saveTodos() {
     localStorage.setItem('todos', JSON.stringify(todos));
@@ -38,6 +36,24 @@ function toggleComplete(id) {
     );
     saveTodos();
     console.log('Todo aggiornato, ID:', id);
+}
+
+function editTodoTitle(id, newTitle) {
+    const todo = todos.find(todo => todo.id === id);
+    if (todo) {
+        todo.title = newTitle;
+        saveTodos();
+        console.log('Titolo del Todo modificato:', newTitle);
+    }
+}
+
+function editTodoCategory(id, newCategory) {
+    const todo = todos.find(todo => todo.id === id);
+    if (todo) {
+        todo.category = newCategory;
+        saveTodos();
+        console.log('Categoria del Todo modificata:', newCategory);
+    }
 }
 
 function filterCompletedTodos() {
